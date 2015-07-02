@@ -1,0 +1,3 @@
+[console_scripts]
+cli/server/main_server = unarea_core.application:main
+
