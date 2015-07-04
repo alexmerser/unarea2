@@ -1,3 +1,0 @@
-[console_scripts]
-cli/publish/publish_server = unarea_publish.application:main
-

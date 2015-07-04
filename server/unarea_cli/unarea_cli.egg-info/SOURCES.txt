@@ -1,9 +1,0 @@
-setup.py
-unarea_cli/__init__.py
-unarea_cli/users.py
-unarea_cli.egg-info/PKG-INFO
-unarea_cli.egg-info/SOURCES.txt
-unarea_cli.egg-info/dependency_links.txt
-unarea_cli.egg-info/entry_points.txt
-unarea_cli.egg-info/requires.txt
-unarea_cli.egg-info/top_level.txt

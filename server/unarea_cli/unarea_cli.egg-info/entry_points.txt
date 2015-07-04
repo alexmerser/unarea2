@@ -1,4 +1,0 @@
-[console_scripts]
-cli/users/get_session = unarea_cli.users:get_session
-cli/users/register = unarea_cli.users:register_user
-

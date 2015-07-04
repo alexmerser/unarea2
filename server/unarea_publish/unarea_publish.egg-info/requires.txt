@@ -1,3 +1,0 @@
-zc.buildout
-setuptools
-tornado==4.2

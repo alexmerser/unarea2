@@ -1,0 +1,70 @@
+{% extends "index.html" %}
+{% import 'macroses.html' as macro %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block content %}
+{% include 'flash.html' %}
+
+<nav class="navbar navbar-default navbar-lower" role="navigation">
+    <ul class="nav navbar-nav">
+        <li><a href="{{ url_for('dashboard.main') }}">Home</a></li>
+        <li><a href="{{ url_for('dashboard.schedule') }}">Розклад</a></li>
+        <li><a href="{{ url_for('dashboard.science') }}">Наукові роботи</a></li>
+    </ul>
+</nav>
+
+{% block dashcontent %}
+<div class="container">
+      <div class="row">
+        <div class="col-md-4">
+            <h5>Тиждень {% if week == '1' %} A {% else %} Б {% endif %} {{ hash_day[day|int] }}</h5>
+            {% if day not in '67' %}
+            <table class="table table-hover table-bordered table-condensed">
+                <tr class="info">
+                    <td>№</td>
+                    <td>Час</td>
+                    <td>Предмет</td>
+                </tr>
+                {{ macro.day(week,day,schedule,teacher) }}
+            </table>
+            {% else %}
+            Its weekend time!
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <h4>Наукові роботи</h4>
+            <a href="{{ url_for('dashboard.science') }}">
+            {% if teacher %}
+                <table class="table">
+                    <tr>
+                        <td>Всього робіт: </td>
+                        <td>{{ total }}</td>
+                    </tr>
+                    <tr>
+                        <td>Без теми: </td>
+                        <td>{{ empty_theme }}</td>
+                    </tr>
+                    <tr>
+                        <td>Без виконавця: </td>
+                        <td>{{ empty_performer }}</td>
+                    </tr>
+                </table>
+            {% else %}
+                <table class="table">
+                    {% for theme in themes %}
+                    <tr>
+                        <td>{{ theme['theme'] }}</td>
+                        <td>{{ theme['supervisor'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+            </a>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+{% endblock %}

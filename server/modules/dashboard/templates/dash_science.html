@@ -1,0 +1,17 @@
+{% extends "main.html" %}
+
+{% block dashcontent %}
+        <table class="table">
+                {% if teacher %}
+                   {% for theme in themes %}
+                      <tr>
+                          <td>{{ theme['group'] }}</td>
+                          <td>{{ theme['performer'] }}</td>
+                          <td>{{ theme['theme'] }}</td>
+                          <td>{{ theme['diploma'] }}</td>
+                      </tr>
+                   {% endfor %}
+                {% else %}
+                {% endif %}
+            </table>
+{% endblock %}

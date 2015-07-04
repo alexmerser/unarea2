@@ -7,7 +7,7 @@ _README = """LONG README HERE"""
 _CHANGES = """RELEASE CHANGELOG HERE"""
 
 setup(
-    name="unarea_core",
+    name="unarea_server",
     version=__version__,
     description="CORE",
     long_description=_README + '\n \n' + _CHANGES,
@@ -20,5 +20,10 @@ setup(
         'setuptools',
         'tornado==4.2',
         'flask==0.10.1'
-    ]
+    ],
+    entry_points={
+        'console_scripts': [
+            'cli/runserver = unarea_server.wsgi:run'
+        ]
+    }
 )
