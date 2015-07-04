@@ -1,4 +1,0 @@
-zc.buildout
-setuptools
-tornado==4.2
-flask==0.10.1

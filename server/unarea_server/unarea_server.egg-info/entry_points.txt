@@ -1,3 +1,0 @@
-[console_scripts]
-cli/runserver = unarea_server.wsgi:run
-

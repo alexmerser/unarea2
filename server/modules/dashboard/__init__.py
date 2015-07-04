@@ -1,1 +1,0 @@
-from .views import mod as module
