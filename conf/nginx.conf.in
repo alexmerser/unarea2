@@ -2,7 +2,7 @@ daemon off;
 
 worker_processes  5;
 error_log ${log_path}/nginx_error.log info;
-pid ${pid_file}/nginx_bill.pid;
+pid ${pid_file}/nginx.pid;
 
 events {
     worker_connections  1024;
@@ -19,7 +19,7 @@ http {
     send_timeout 240;
     proxy_buffer_size 128k;
     proxy_buffers 8 128k;
-    proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=c_avatars_cache:8m max_size=3G inactive=365m;
+    proxy_cache_path ${log_path}cache/nginx levels=1:2 keys_zone=c_avatars_cache:8m max_size=3G inactive=365m;
 
     upstream unarea_core {
         server 0.0.0.0:7000 fail_timeout=0;
@@ -39,6 +39,6 @@ http {
         }
 
         access_log ${log_path}/nginx_access.log main;
-        error_log   ${log_path}/nginx_bill_error.log;
+        error_log   ${log_path}/nginx_error.log;
     }
 }
