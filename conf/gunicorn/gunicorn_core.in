@@ -1,0 +1,14 @@
+bind = "127.0.0.1:1234"     # Or "unix:/tmp/gunicorn.sock"
+daemon = False              # Whether work in the background
+debug = False               # Some extra logging
+errorlog = "-"              # Name of the log file
+accesslog = "-"
+loglevel = "info"           # The level at which to log
+pidfile = None              # Path to a PID file
+workers = 3                 # Number of workers to initialize
+umask = 0                   # Umask to set when daemonizing
+user=None                 # Change process owner to user
+group = None                # Change process group to group
+proc_name = None            # Change the process name
+tmp_upload_dir = None       # Set path used to store temporary uploads
+preload_app = True

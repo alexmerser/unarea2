@@ -14,9 +14,9 @@ setup(
     install_requires=[
         'zc.buildout',
         'setuptools',
-    ],
-    entry_points={
-        'console_scripts': [
-            'runserver = unarea_core.run:run']
-    }
+    ]
+    # entry_points={
+    #     'console_scripts': [
+    #         'runserver = unarea_core.run:run']
+    # }
 )
