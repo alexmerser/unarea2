@@ -47,6 +47,7 @@ def restart_all():
 
 def start_app():
     with cd('unarea-server'):
+        run('bin/supervisord')
         run('bin/supervisorctl start all')
 
 
