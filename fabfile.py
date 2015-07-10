@@ -26,11 +26,11 @@ def deploy():
         run('python bootstrap.py')
         run('bin/buildout')
 
-        sudo('cp etc/nginx_unarea_server.conf /etc/nginx/sites-available/unarea-server.conf')
-        sudo('rm -rf /etc/nginx/sites-enabled/unarea-server.conf')
-        sudo('ln -s /etc/nginx/sites-available/unarea-server.conf /etc/nginx/sites-enabled/unarea-server.conf')
-
-        sudo('service nginx restart')
+        # sudo('cp etc/nginx_unarea_server.conf /etc/nginx/sites-available/unarea-server.conf')
+        # sudo('rm -rf /etc/nginx/sites-enabled/unarea-server.conf')
+        # sudo('ln -s /etc/nginx/sites-available/unarea-server.conf /etc/nginx/sites-enabled/unarea-server.conf')
+        #
+        # sudo('service nginx restart')
 
 def shutdown_all():
     with cd('unarea-server'):
