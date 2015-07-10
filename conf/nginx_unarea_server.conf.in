@@ -14,9 +14,6 @@ server {
   client_header_timeout 240;
   client_body_timeout 240;
   send_timeout 240;
-  proxy_buffer_size 128k;
-  proxy_buffers 8 128k;
-  proxy_cache_path ${cache} levels=1:2 keys_zone=c_avatars_cache:8m max_size=3G inactive=365m;
 
   location / {
     proxy_redirect      off;
