@@ -12,7 +12,8 @@ env.password = "uadmin1pass"
 def cleanup():
     if exists('unarea-server'):
         run('rm -rf unarea-server')
-    sudo('rm -rf /etc/nginx/sites-enabled/unarea-server.conf')
+    sudo('rm -rf /etc/nginx/sites-enabled/nginx_unarea_server.conf')
+    sudo('rm -rf /etc/nginx/sites-available/nginx_unarea_server.conf')
 
 def deploy():
     if not exists('unarea-server'):
@@ -46,7 +47,6 @@ def restart_all():
 
 def start_app():
     with cd('unarea-server'):
-        run('bin/supervisord')
         run('bin/supervisorctl start all')
 
 

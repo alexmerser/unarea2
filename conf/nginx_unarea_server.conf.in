@@ -3,7 +3,7 @@ upstream unarea_core {
 }
 
 server {
-  listen 80;
+  listen 172.127.0.50:80;
   tcp_nopush on;
   tcp_nodelay on;
 
