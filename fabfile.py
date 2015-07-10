@@ -9,19 +9,39 @@ env.user = 'uadmin'
 env.hosts = ['172.127.0.50']
 env.password = "uadmin1pass"
 
+def cleanup():
+    if exists('unarea-server'):
+        run('rm -rf unarea-server')
+    sudo('rm -rf /etc/nginx/sites-enabled/unarea-server.conf')
+
 def deploy():
     if not exists('unarea-server'):
         run('git clone git@bitbucket.org:unarea/unarea-server.git')
     else:
         run('ls -las')
     with cd('unarea-server'):
-        run('git checkout develop')
-        run('git branch')
+
+        if 'develop' not in run('git branch'):
+            run('git checkout develop')
         run('python bootstrap.py')
         run('bin/buildout')
-        # sudo('cp etc/nginx_unarea_server.conf /etc/nginx/nginx.conf')
-        # sudo('service nginx restart')
 
+        sudo('cp etc/nginx_unarea_server.conf /etc/nginx/sites-available/unarea-server.conf')
+        sudo('rm -rf /etc/nginx/sites-enabled/unarea-server.conf')
+        sudo('ln -s /etc/nginx/sites-available/unarea-server.conf /etc/nginx/sites-enabled/unarea-server.conf')
+
+        sudo('service nginx restart')
+
+def shutdown_all():
+    with cd('unarea-server'):
+        run('bin/supervisorctl stop all')
+
+
+def restart_all():
+    with cd('unarea-server'):
+        run('bin/supervisorctl stop all')
+        run('bin/supervisorctl reload')
+        run('bin/supervisorctl start all')
 
 def start_app():
     with cd('unarea-server'):

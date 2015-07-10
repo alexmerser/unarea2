@@ -1,10 +1,69 @@
-server {
-    location / {
-        proxy_pass http://localhost:9001/;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
+daemon off;
+
+worker_processes  5;
+error_log ${error-logs} debug;
+pid ${pid-file};
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    default_type application/octet-stream;
+
+    #log_format main '$remote_addr - $remote_user [$time_local] ($upstream_addr [$upstream_response_time] $upstream_status) "$request" $status $bytes_sent "$http_referer" "$http_user_agent" "$gzip_ratio"';
+    log_format main '$remote_addr||$remote_user||$time_local||$upstream_addr||$upstream_response_time||$upstream_status||$request||$status||$bytes_sent||$http_referer||$http_user_agent||$http_x_nimble_user||$http_x_nimble_user_id||$http_x_nimble_company||$http_x_nimble_company_id||$gzip_ratio';
+    ignore_invalid_headers on;
+    index index.html;
+    client_header_timeout 240;
+    client_body_timeout 240;
+    send_timeout 240;
+    proxy_buffer_size 128k;
+    proxy_buffers 8 128k;
+    proxy_cache_path ${cache} levels=1:2 keys_zone=c_avatars_cache:8m max_size=3G inactive=365m;
+
+    upstream supervisor_web {
+        server 127.0.0.1:9001;
     }
-    location /static {
-        alias  /home/www/flask_project/static/;
+
+    upstream unarea_core {
+        server 127.0.0.1:1234;
     }
+
+    server {
+        listen localhost:8081;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+        proxy_connect_timeout      240;
+        proxy_send_timeout         240;
+        proxy_read_timeout         240;
+
+        location / {
+            proxy_intercept_errors on;
+            proxy_pass http://unarea_core;
+        }
+
+        access_log  ${access_log} main;
+        error_log   ${errors_log};
+    }
+
+    server {
+        listen 8090;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+        proxy_connect_timeout      240;
+        proxy_send_timeout         240;
+        proxy_read_timeout         240;
+
+        location / {
+            client_max_body_size 100m;
+            proxy_pass http://supervisor_web;
+        }
+
+        access_log  ${access_log} main;
+        error_log   ${errors_log};
+    }
+
 }
