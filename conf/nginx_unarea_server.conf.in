@@ -31,7 +31,7 @@ http {
     }
 
     server {
-        listen localhost:8081;
+        listen 127.0.0.1:8081;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header Host $http_host;
         proxy_redirect off;
@@ -49,7 +49,7 @@ http {
     }
 
     server {
-        listen 8090;
+        listen 127.0.0.1:8090;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header Host $http_host;
         proxy_redirect off;
