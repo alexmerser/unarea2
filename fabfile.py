@@ -47,3 +47,8 @@ def start_app():
     with cd('unarea-server'):
         run('bin/supervisord')
         run('bin/supervisorctl start all')
+
+
+def status():
+    with cd('unarea-server'):
+        run('bin/supervisorctl status')
