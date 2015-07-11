@@ -14,7 +14,6 @@ def get_environment(config):
     config_data = configobj.ConfigObj(config, list_values=False)
     environ = os.environ.copy()
     environ.update(config_data["main"] if "main" in config_data else config_data)
-    print environ
     return environ
 
 def get_config_file(environment=None):
@@ -28,8 +27,5 @@ def get_config_file(environment=None):
     """
     if environment is None:
         environment = os.environ['UNAREA_ENV_TYPE']
-    print environment
     home_dir = os.environ['UNAREA_APP_HOME']
-    print home_dir
-    print os.path.join(home_dir, "etc/configs", environment.lower() + ".cfg")
     return os.path.join(home_dir, "etc/configs", environment.lower() + ".cfg")
