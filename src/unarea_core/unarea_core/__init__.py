@@ -10,7 +10,7 @@ def hello():
 
 
 @app.route("/about")
-def hello():
+def about():
     return ("NGINX Plus is the HTTP operating system for the modern web application.\n"
             "     Whether you’re delivering content, streaming video or audio, or deploying complex web services, \n"
             "     NGINX Plus is the optimal platform to connect your users to your applications.\n"
