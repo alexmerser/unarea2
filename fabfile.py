@@ -18,11 +18,13 @@ def stage():
          fab stage <task>
     """
     env.name = 'stage'
+    env.type = 'STAGE'
     env.project_root = '/home/unarea/'
     env.server_root = env.project_root+'unarea-server'
     env.repository = 'git@bitbucket.org:unarea/unarea-server.git'
     env.hosts = ['172.127.0.50']
     env.user = 'uadmin'
+    env.password = 'uadmin1pass'
     env.branch = 'develop'
 
 def deploy():
@@ -71,6 +73,7 @@ def init():
         run('git clone %(repository)s' % env)
     with cd(env.server_root):
         run('git checkout %(branch)s; git pull origin %(branch)s;' % env)
+        run('export UNAREA_ENV_TYPE=%(type)s' % env)
         run('python bootstrap.py')
         run('bin/buildout')
         start_supervisor()

@@ -8,15 +8,8 @@ setup(
     description="CORE",
     long_description="LONG",
     license="TBD",
-    packages=find_packages(),
+    packages=find_packages(exclude=['ez_setup']),
     include_package_data=True,
     zip_safe=False,
-    install_requires=[
-        'zc.buildout',
-        'setuptools',
-    ]
-    # entry_points={
-    #     'console_scripts': [
-    #         'runserver = unarea_core.run:run']
-    # }
+    install_requires=['zc.buildout', 'setuptools']
 )

@@ -1,12 +1,13 @@
 # coding=utf-8
 from flask import Flask
+from unarea_core.settings.default import configure_app
 
 app = Flask(__name__)
-
+configure_app(app)
 
 @app.route("/")
 def hello():
-    return "Hello World!"
+    return "YOLO!!!"
 
 
 @app.route("/about")
