@@ -19,3 +19,9 @@ def about():
             "mobile, and API traffic equally well before switching and routing each request to the correct service.\n"
             " Companies deploy NGINX Plus to manage the complexities and pitfalls associated with HTTP and to make \n"
             "their web applications more responsive, scalable, fast, and secure.\n")
+
+
+@app.route("/simple")
+def simple():
+    return ("Nginx is a fast and flexible HTTP server written in C.\n"
+            "You can install it with the nginx package on Ubuntu:!\n")
