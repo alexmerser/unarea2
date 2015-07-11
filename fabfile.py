@@ -1,13 +1,15 @@
-from fabric.operations import run, sudo, require
-from fabric.context_managers import cd, env
-from fabric.contrib.files import exists
-
+# DEPLOY STAGE
 # the user to use for the remote commands
-
+#
 # env.user = 'uadmin'
 # the servers where the commands are executed
 # env.hosts = ['172.127.0.50']
 # env.password = "uadmin1pass"
+
+from fabric.operations import run, sudo, require
+from fabric.context_managers import cd, env
+from fabric.contrib.files import exists
+
 
 def stage():
     """
@@ -35,12 +37,6 @@ def deploy():
     configure_parts()
     start_apps()
     restart_nginx()
-#    setup_dirs()
-#    local_settings()
-#    collect_static()
-#    install_requirements()
-#    syncdb_migrate()
-#    nginx_restart()
 
 def git_pull():
     with cd(env.server_root):
