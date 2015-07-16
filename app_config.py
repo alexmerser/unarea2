@@ -1,7 +1,7 @@
 import os
 import sys
 import os.path
-from unarea_core.lib.configtools.env import collect, get
+from unarea_core.settings.utils import collect, get
 
 
 def get_env_vars():
@@ -22,7 +22,7 @@ def make():
     data = get_env_vars()
     config_file = _make_config_file_name(data)
     with file(config_file[:-3], "w") as out_config:
-        out_config.write('\n'.join('{}={}'.format(key, value) for key, value in data.iteritems()))
+        out_config.write('\n'.join('{} = \'{}\''.format(key, value) for key, value in data.iteritems()))
         out_config.close()
     print >> sys.stdout, "\nCreated config file >>> %s >>> for environment %s \n" % (config_file[:-3],
                                                                                      data.get('UNAREA_ENV_TYPE'))

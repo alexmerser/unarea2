@@ -12,3 +12,4 @@ group = None                # Change process group to group
 proc_name = None            # Change the process name
 tmp_upload_dir = None       # Set path used to store temporary uploads
 preload_app = True
+reload = True

@@ -4,9 +4,8 @@
 """
 import collections
 
-__version__ = '0.9.0'
-__all__ = ('ConfigError', 'ConfigKeyError', 'ConfigSchema', 'ConfigTypeError',
-           'ConfigVar', 'get_typename')
+__all__ = ['ConfigError', 'ConfigKeyError', 'ConfigSchema', 'ConfigTypeError',
+           'ConfigVar', 'get_typename']
 
 
 class ConfigSchema(dict):
