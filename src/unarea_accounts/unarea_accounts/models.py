@@ -75,7 +75,7 @@ class UserModel(MongoEngineUserDatastore):
         return user.auth_token
 
     def get_by_token(self, token):
-        user = self.user_model.objects(auth_token=str(token))
+        user = self.user_model.objects.get(auth_token=str(token))
         return user
 
     def get_by(self, **kwargs):
