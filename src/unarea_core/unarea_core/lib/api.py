@@ -15,9 +15,14 @@ class APIJsonEncoder(json.JSONEncoder):
 class APIResponse(object):
     status_code = None
 
-    def __new__(cls, result, fields, *args, **kwargs):
-        encoded_results = marshal(result, fields)
-        return encoded_results, cls.status_code
+    def __new__(cls, result, fields=None, headers=None, message=u'', *args, **kwargs):
+        if fields:
+            encoded_results = marshal(result, fields)
+        else:
+            encoded_results = result
+            encoded_results.update({u'message': message})
+
+        return encoded_results, cls.status_code, headers or {}
 
 class SuccessApiResponse(APIResponse):
     status_code = 200
